@@ -14,3 +14,5 @@ we made the issuelist program and make it similar to the demoapp and make change
     
 We used a const to pass the values of issuelist and also later passed the style using the props arguement and used it in the issueList component
     - we passed multiple objects to a component and later on accessed it using the props arguement to access each of them
+    - we used props as arguement to access the multiple objects that are passsed among the components, this objects can be accessed by props as a normal arguement variable 
+    
