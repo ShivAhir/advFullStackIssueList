@@ -51,9 +51,19 @@ function IssueTable() {
       Info: "This is the info for task B",
     },
   ];
-  const allIssueRow = issueList.map((issue) => (
+
+  // here we used hooks to maintain the state
+  // react.usestate is a hook
+  const [allIssues, setAllIssues] = React.useState([]);
+
+  const allIssueRow = allIssues.map((issue) => (
     <IssueRow issue={issue} style={style} />
   ));
+  // this is a function to set the issues using the hook's function setAllIssues
+  setTimeout(() => {
+    setAllIssues(issueList);
+  }, 2000);
+
   return (
     <div>
       <h2>Welcome to IssueTable</h2>
@@ -70,11 +80,11 @@ function IssueTable() {
           </tr>
         </thead>
         <tbody>
-          {/* {allIssueRow} */}
-          {/* // using foreach loop  */}  
-          {issueList.forEach((issue) => {
+          {allIssueRow}
+          {/* // using foreach loop  */}
+          {/* {issueList.forEach((issue) => {
             <IssueRow issue={issue} style={style} />;
-          })}
+          })} */}
           {/* <IssueRow issue={issueList} style={style} /> */}
         </tbody>
       </table>

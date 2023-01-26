@@ -16,3 +16,6 @@ We used a const to pass the values of issuelist and also later passed the style 
     - we passed multiple objects to a component and later on accessed it using the props arguement to access each of them
     - we used props as arguement to access the multiple objects that are passsed among the components, this objects can be accessed by props as a normal arguement variable 
     
+WEEK-3:
+
+we made the react hook with the help of react.useState to maintain the state of the component and make it refresh whenever needed 

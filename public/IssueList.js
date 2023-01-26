@@ -45,16 +45,19 @@ function IssueTable() {
     Due: "2023-02-15",
     Info: "This is the info for task B"
   }];
-  const allIssueRow = issueList.map(issue => /*#__PURE__*/React.createElement(IssueRow, {
+
+  // here we used hooks to maintain the state
+  // react.usestate is a hook
+  const [allIssues, setAllIssues] = React.useState([]);
+  const allIssueRow = allIssues.map(issue => /*#__PURE__*/React.createElement(IssueRow, {
     issue: issue,
     style: style
   }));
-  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", null, "Welcome to IssueTable"), /*#__PURE__*/React.createElement("table", null, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "ID"), /*#__PURE__*/React.createElement("th", null, "Owner"), /*#__PURE__*/React.createElement("th", null, "Status"), /*#__PURE__*/React.createElement("th", null, "Created"), /*#__PURE__*/React.createElement("th", null, "Efforts"), /*#__PURE__*/React.createElement("th", null, "Due"), /*#__PURE__*/React.createElement("th", null, "Title"))), /*#__PURE__*/React.createElement("tbody", null, issueList.forEach(issue => {
-    /*#__PURE__*/React.createElement(IssueRow, {
-      issue: issue,
-      style: style
-    });
-  }))));
+  // this is a function to set the issues using the hook's function setAllIssues
+  setTimeout(() => {
+    setAllIssues(issueList);
+  }, 2000);
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", null, "Welcome to IssueTable"), /*#__PURE__*/React.createElement("table", null, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "ID"), /*#__PURE__*/React.createElement("th", null, "Owner"), /*#__PURE__*/React.createElement("th", null, "Status"), /*#__PURE__*/React.createElement("th", null, "Created"), /*#__PURE__*/React.createElement("th", null, "Efforts"), /*#__PURE__*/React.createElement("th", null, "Due"), /*#__PURE__*/React.createElement("th", null, "Title"))), /*#__PURE__*/React.createElement("tbody", null, allIssueRow)));
 }
 const IssueList = () => {
   return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(IssueFilter, null), /*#__PURE__*/React.createElement("hr", null), /*#__PURE__*/React.createElement(IssueAdd, null), /*#__PURE__*/React.createElement("hr", null), /*#__PURE__*/React.createElement(IssueTable, null));
