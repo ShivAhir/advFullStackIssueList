@@ -18,4 +18,6 @@ We used a const to pass the values of issuelist and also later passed the style 
     
 WEEK-3:
 
-we made the react hook with the help of react.useState to maintain the state of the component and make it refresh whenever needed 
+    - we made the react hook with the help of react.useState to maintain the state of the component and make it refresh whenever needed 
+    - we added a function to add a new single issuelist whenever button is clicked by using two useEffect but later we added the method to add a single issue on the onClick method of button itself
+    - we created a form to get the user defined values and then push them to the issueList and display it on submitting the form 
