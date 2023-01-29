@@ -12,7 +12,7 @@ function IssueAdd({
       Status: form.status.value,
       Created: new Date().toUTCString(),
       Effort: parseInt(form.effort.value),
-      Due: new (Date() + parseInt(form.effort.value)).toUTCString(),
+      Due: new Date().toUTCString(),
       Title: form.title.value
     };
     console.log(singleIssue);
@@ -150,18 +150,21 @@ const IssueList = () => {
     Due: "2023-02-15",
     Title: "This is the info for task B"
   }];
+
+  // hook to add issue
   const [allIssues, setAllIssues] = React.useState([]);
-  const addSingleIssue = newIssue => {
-    let issues = allIssues.slice();
-    issues.push(newIssue);
-    setAllIssues(issues);
-    console.log(issues);
-  };
   React.useEffect(() => {
     setTimeout(() => {
       setAllIssues(issueList);
     }, 2000);
   }, []);
+
+  // function to add single issue
+  const addSingleIssue = newIssue => {
+    let issues = allIssues.slice();
+    issues.push(newIssue);
+    setAllIssues(issues);
+  };
   return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(IssueFilter, null), /*#__PURE__*/React.createElement("hr", null), /*#__PURE__*/React.createElement(IssueAdd, {
     AddSingleIssue: addSingleIssue
   }), /*#__PURE__*/React.createElement("hr", null), /*#__PURE__*/React.createElement(IssueTable, {

@@ -15,12 +15,12 @@ function IssueAdd({ AddSingleIssue }) {
       Status: form.status.value,
       Created: new Date().toUTCString(),
       Effort: parseInt(form.effort.value),
-      Due: new (Date() + parseInt(form.effort.value)).toUTCString(),
+      Due: new Date().toUTCString(),
       Title: form.title.value,
     };
     console.log(singleIssue);
     AddSingleIssue(singleIssue);
-  }; 
+  };
   return (
     <div>
       <h2>Welcome to IssueAdd</h2>
@@ -169,18 +169,20 @@ const IssueList = () => {
     },
   ];
 
+  // hook to add issue
   const [allIssues, setAllIssues] = React.useState([]);
-  const addSingleIssue = (newIssue) => {
-    let issues = allIssues.slice();
-    issues.push(newIssue);
-    setAllIssues(issues);
-    console.log(issues);
-  };
   React.useEffect(() => {
     setTimeout(() => {
       setAllIssues(issueList);
     }, 2000);
   }, []);
+
+  // function to add single issue
+  const addSingleIssue = (newIssue) => {
+    let issues = allIssues.slice();
+    issues.push(newIssue);
+    setAllIssues(issues);
+  };
   return (
     <div>
       <IssueFilter />
