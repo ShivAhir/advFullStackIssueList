@@ -148,38 +148,79 @@ function IssueTable({ allIssues }) {
   );
 }
 const IssueList = () => {
-  const issueList = [
-    {
-      Id: 1,
-      Owner: "Person-A",
-      Status: "Assigned",
-      Created: "2023-01-20",
-      Effort: 4,
-      Due: "2023-01-30",
-      Title: "This is the info for task A",
-    },
-    {
-      Id: 2,
-      Owner: "Person-B",
-      Status: "Assigned",
-      Created: "2023-01-20",
-      Effort: 8,
-      Due: "2023-02-15",
-      Title: "This is the info for task B",
-    },
-  ];
+  /************/
+
+  let query = `
+  query  {
+      issueList {
+          Id
+          Status
+          Owner
+          Effort
+          Created
+          Due
+          Title
+      }
+  }
+  `;
+
+  // const issueList = [
+  //   {
+  //     Id: 1,
+  //     Owner: "Person-A",
+  //     Status: "Assigned",
+  //     Created: "2023-01-20",
+  //     Effort: 4,
+  //     Due: "2023-01-30",
+  //     Title: "This is the info for task A",
+  //   },
+  //   {
+  //     Id: 2,
+  //     Owner: "Person-B",
+  //     Status: "Assigned",
+  //     Created: "2023-01-20",
+  //     Effort: 8,
+  //     Due: "2023-02-15",
+  //     Title: "This is the info for task B",
+  //   },
+  // ];
 
   // hook to add issue
   const [allIssues, setAllIssues] = React.useState([]);
-  React.useEffect(() => {
-    setTimeout(() => {
-      setAllIssues(issueList);
-    }, 2000);
+  React.useEffect(function () {
+    fetch("/graphql", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ query }),
+    }).then(async (response) => {
+      let tempIssues = await response.json();
+      let tempList = tempIssues.data.issueList;
+      console.log(tempIssues);
+      setAllIssues(tempList);
+    });
   }, []);
 
   // function to add single issue
   const addSingleIssue = (newIssue) => {
+    let query = `
+      mutation SetGreetMessage($setGreetMessageMessage2: String!) {
+        setGreetMessage(message: $setGreetMessageMessage2)
+    }
+    `;
+
+    fetch("/graphql", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        query,
+        variables: { setGreetMessageMessage2: "Hello I'm from client side" },
+      }),
+    }).then(async (response) => {
+      let tempMessage = await response.json();
+      console.log(tempMessage);
+    });
     let issues = allIssues.slice();
+    newIssue.Id = allIssues.length + 1; // for incrementing the id in the table
     issues.push(newIssue);
     setAllIssues(issues);
   };
